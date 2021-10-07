@@ -58,6 +58,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "spree_frontend", ">= 2.3.0"
   spec.add_dependency "spree_backend", ">= 2.3.0"
 
-  spec.add_dependency "klarna_client", ">= 0.9.1"
+  spec.add_dependency "klarna_client", ">= 0.9.0"
   spec.add_dependency "activemerchant"
 end
