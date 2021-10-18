@@ -1,4 +1,5 @@
 "use strict";
+var KlarnaGateway = {};
 (function(KlarnaGateway, $) {
   $.fn.klarnaAuthorize = function(options) {
     var settings = $.extend({
@@ -20,13 +21,12 @@
 
     // Get a session from the backend and load the form
     function initSession() {
-
       // Try to create a new session in the backend
       Spree.ajax({
         method: "POST",
         url: settings.sessionUrl,
         data: {klarna_payment_method_id: settings.paymentId}
-      }).success(function(response) {
+      }).then(function(response) {
         if (!response.token) {
           window.console && console.log("[Klarna Credit] received empty token:", response);
           displayError();
@@ -43,7 +43,7 @@
         if (settings.loadDirectly || settings.klarnaSelected(settings)) {
           loadKlarnaForm();
         }
-      }).error(function(response) {
+      }).catch(function(response) {
         window.console && console.log("[Klarna Credit] received erroneous server response:", response);
         displayError();
       });
@@ -138,7 +138,6 @@
     initSession();
     return this;
   };
-
   KlarnaGateway.loadSdk = function(w, d, callback) {
     var url = "https://credit.klarnacdn.net/lib/v1/api.js";
     var n = d.createElement("script");
@@ -148,4 +147,5 @@
     c.parentNode.replaceChild(n, c);
     n.onload = callback;
   };
-}(window.KlarnaGateway = window.KlarnaGateway || {}, jQuery));
+}(KlarnaGateway, jQuery));
+

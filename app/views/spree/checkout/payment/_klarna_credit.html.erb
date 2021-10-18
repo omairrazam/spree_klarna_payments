@@ -15,7 +15,9 @@
 
 <script type="text/javascript" id="klarna-credit-lib-x">
 /* <![CDATA[ */
-KlarnaGateway.loadSdk(this, document, function() {
+setTimeout(() => {
+  KlarnaGateway.loadSdk(this, document, function() {
+
   jQuery(".klarna_credit_box").klarnaAuthorize({
     onSubmit:function(settings) {
       // Update the order when a coupon was applied in this step
@@ -30,5 +32,7 @@ KlarnaGateway.loadSdk(this, document, function() {
     }
   });
 });
+}, 500)
+
  /* ]]> */
 </script>
