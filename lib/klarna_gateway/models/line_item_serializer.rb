@@ -56,13 +56,14 @@ module KlarnaGateway
     end
 
     def image_url
+      return 'https://d3cctxpeul304k.cloudfront.net/variants/xbvpnduqmajlz2wch46whr90c87l/8cb5757b5927b5c3237adba833e86c26f16bb518e581e4f7778328724fea042a'
       image = line_item.variant.images.first
 
       return unless image.present?
       host = ActionController::Base.asset_host || store.url.to_s
       begin
-        scheme = "http://" unless host.to_s.match(/^https?:\/\//)
-        uri = URI::parse("#{scheme}#{host.sub(/\/$/, '')}#{image.attachment.url}")
+        #scheme = "http://" unless host.to_s.match(/^https?:\/\//)
+        #uri = URI::parse("#{scheme}#{host.sub(/\/$/, '')}#{image.attachment.url}")
       rescue URI::InvalidURIError => e
         return nil
       end
